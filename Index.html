@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetrex Bio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        /* ВИДЕО ФОН С НОВЫМ НАЗВАНИЕМ */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            z-index: 1;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+        }
+
+        /* ТАБЛИЧКА С МОЩНЫМ НЕОНОМ (БЕЛЫЙ И СЕРЫЙ) */
+        .info-card {
+            background-color: rgba(40, 40, 40, 0.7); 
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid white; 
+            animation: heavyNeonPulse 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes heavyNeonPulse {
+            0% {
+                border-color: #ffffff;
+                box-shadow: 
+                    0 0 15px #ffffff, 
+                    0 0 30px #ffffff, 
+                    0 0 50px #888888;
+            }
+            100% {
+                border-color: #666666;
+                box-shadow: 
+                    0 0 10px #666666, 
+                    0 0 20px #444444, 
+                    0 0 35px #222222;
+            }
+        }
+
+        .info-card h1 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .info-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 8px 0;
+            color: #efefef;
+        }
+
+        /* МУЗЫКАЛЬНЫЙ ПЛЕЕР */
+        .music-player {
+            width: 100%;
+            background-color: rgba(15, 15, 15, 0.9);
+            border-radius: 15px;
+            padding: 15px 25px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .music-player:hover {
+            border-color: #ffffff;
+            background-color: rgba(25, 25, 25, 0.95);
+        }
+
+        .track-info {
+            text-align: left;
+        }
+
+        .track-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .track-artist {
+            font-size: 12px;
+            color: #aaaaaa;
+        }
+
+        .play-btn {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .play-icon {
+            width: 0; height: 0; 
+            border-top: 7px solid transparent;
+            border-bottom: 7px solid transparent;
+            border-left: 11px solid black;
+            margin-left: 3px;
+        }
+
+        .pause-icon {
+            width: 12px;
+            height: 14px;
+            border-left: 4px solid black;
+            border-right: 4px solid black;
+            display: none;
+        }
+
+        .playing .play-icon { display: none; }
+        .playing .pause-icon { display: block; }
+
+        /* СЧЕТЧИК С ГЛАЗОМ */
+        .view-counter {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .eye-icon { margin-right: 8px; }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop id="bg-video">
+        <source src="test_fon.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <img src="0987654321.png" alt="Avatar" class="profile-pic">
+
+        <div class="info-card">
+            <h1>Hi, my name is vetrex</h1>
+            <p>I am a moderator on the CapybaraScript server and the owner of the vetrex scripts server.</p>
+            <p>I am 16 years old, I live in Belarus, I have been studying lua for 3 months and I am friends with some developers of scripts for the game murder mystery 2</p>
+        </div>
+
+        <div class="music-player">
+            <div class="track-info">
+                <div class="track-title">7AM slowed+reverb</div>
+                <div class="track-artist">Playing test.mp3</div>
+            </div>
+            <button class="play-btn" id="playBtn">
+                <div class="play-icon"></div>
+                <div class="pause-icon"></div>
+            </button>
+        </div>
+    </div>
+
+    <div class="view-counter">
+        <span class="eye-icon">👁️</span>
+        <span id="count-number">0</span>
+    </div>
+
+    <audio id="audio-player" src="test.mp4" loop></audio>
+
+    <script>
+        const playBtn = document.getElementById('playBtn');
+        const audio = document.getElementById('audio-player');
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                playBtn.classList.remove('playing');
+            }
+        });
+
+        // Счетчик
+        document.addEventListener("DOMContentLoaded", function() {
+            const counterElement = document.getElementById('count-number');
+            let views = localStorage.getItem('v_count') || 0;
+            views = parseInt(views) + 1;
+            localStorage.setItem('v_count', views);
+            counterElement.textContent = views;
+        });
+    </script>
+</body>
+</html>
